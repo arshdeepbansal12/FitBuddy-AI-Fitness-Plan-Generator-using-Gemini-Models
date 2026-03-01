@@ -27,16 +27,25 @@ from sqlalchemy.orm import DeclarativeBase, Session
 # ─────────────────────────────────────────────
 # 0.  Environment & Gemini setup
 # ─────────────────────────────────────────────
-#load_dotenv()                                      # reads .env file if present
-GEMINI_API_KEY = "AIzaSyBjUXLmXV6WV0KPomsbL88tpTIioHp6bao" # set your key here or in .env
+import os
+from dotenv import load_dotenv
+
+# 0. Environment & Gemini setup
+# -----------------------------------------------------
+
+load_dotenv()  # reads .env file if present
+
+# Fetch the key from your environment variables
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 if GEMINI_API_KEY:
-    genai.configure(api_key="AIzaSyBjUXLmXV6WV0KPomsbL88tpTIioHp6bao")
+    # Safely pass the variable here, NOT the hardcoded string
+    genai.configure(api_key=GEMINI_API_KEY)
     # Use the latest Gemini Flash model for fast, cost-effective responses
     gemini_model = genai.GenerativeModel("gemini-2.5-flash")
 else:
-    gemini_model = None                            # graceful degradation in demo mode
-
+    gemini_model = None
+    print("WARNING: GEMINI_API_KEY not found in environment. Running in demo mode.")
 
 # ─────────────────────────────────────────────
 # 1.  Database  (SQLAlchemy + SQLite)
