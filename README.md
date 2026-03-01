@@ -44,7 +44,7 @@ It generates personalized 7-day workout plans based on user goals, age, weight, 
 
 \- \*\*Database:\*\* SQLite
 
-\- \*\*AI Model:\*\* Google Gemini 1.5 Flash
+\- \*\*AI Model:\*\* Google Gemini 2.5 Flash
 
 \- \*\*ORM:\*\* SQLAlchemy
 
